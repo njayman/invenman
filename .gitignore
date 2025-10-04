@@ -1,1 +1,101 @@
+# --------------------------------------------------
+# Odoo 17 .gitignore Template
+# --------------------------------------------------
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Odoo-specific files
+*.log
+*.pot
+*.pyc
+*.swp
+*.swo
+*.zip
+*.bak
+*.save
+*.tmp
+*.temp
+
+# Odoo auto-generated directories
+*.egg-info/
+odoo/addons/*/static/lib/
+odoo/addons/*/i18n/*.pot
+odoo/addons/*/__pycache__/
+
+# Local Odoo config files
+*.cfg
+*.ini
+
+# Database dumps
+*.sql
+*.dump
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Compiled assets
+*.min.js
+*.min.css
+/static/lib/
+node_modules/
+package-lock.json
+yarn.lock
+
+# Build and cache directories
+build/
+dist/
+tmp/
+temp/
+.cache/
+.eggs/
+
+# Virtual environments
+venv/
+env/
+.venv/
+.env/
+ENV/
+
+# IDE and editor files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# OS-generated files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# PyCharm / VSCode metadata
+*.iml
+*.code-workspace
+
+# Testing and coverage
+.tox/
+.nox/
+.coverage
+coverage.xml
+htmlcov/
+pytest_cache/
+
+# Docker
+docker-compose.override.yml
+docker-data/
+.docker/
+*.pid
+
+# Optional: Ignore custom addons that shouldn't be versioned
+# Uncomment and list local addons here
+# custom_addons/*
+# local_addons/*
+
+# Optional: Ignore filestore (attachments, etc.)
+filestore/
+odoo/filestore/
 odoo_pg_pass

@@ -8,6 +8,7 @@
     'category': 'Inventory',
     'data': [
         'security/ir.model.access.csv',
+        'data/unit_data.xml',
         'views/product_views.xml',
         'views/product_category_views.xml',
         'views/customer_views.xml',

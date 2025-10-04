@@ -35,12 +35,5 @@
             <field name="res_model">invenman.unit</field>
             <field name="view_mode">tree,form</field>
         </record>
-
-        <!-- Menu -->
-        <menuitem id="invenman.menu_unit_root" 
-                  name="Units" 
-                  sequence="10" 
-                  parent="invenman.menu_root" 
-                  action="invenman.unit_action"/>
     </data>
 </odoo>
