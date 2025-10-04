@@ -1,0 +1,23 @@
+<odoo>
+    <data>
+        <record id="invenman.supplier_tree" model="ir.ui.view">
+            <field name="name">invenman.supplier.tree</field>
+            <field name="model">invenman.supplier</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="organization"/>
+                    <field name="address"/>
+                    <field name="contact_no"/>
+                    <field name="nid"/>
+                </tree>
+            </field>
+        </record>
+        <record id="invenman.supplier_action" model="ir.actions.act_window">
+            <field name="name">Suppliers</field>
+            <field name="res_model">invenman.supplier</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+    </data>
+</odoo>

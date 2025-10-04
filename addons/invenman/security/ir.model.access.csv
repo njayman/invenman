@@ -1,0 +1,9 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+invenman.access_product_user,access_product_user,model_invenman_product,base.group_user,1,1,1,1
+invenman.access_product_category_user,access_product_category_user,model_invenman_product_category,base.group_user,1,1,1,1
+invenman.access_customer_user,access_customer_user,model_invenman_customer,base.group_user,1,1,1,1
+invenman.access_supplier_user,access_supplier_user,model_invenman_supplier,base.group_user,1,1,1,1
+invenman.access_product_lot_user,access_product_lot_user,model_invenman_product_lot,base.group_user,1,1,1,1
+invenman.access_sale_user,access_sale_user,model_invenman_sale,base.group_user,1,1,1,1
+invenman.access_sale_line_user,access_sale_line_user,model_invenman_sale_line,base.group_user,1,1,1,1
+invenman.access_unit_user,access_unit_user,model_invenman_unit,base.group_user,1,1,1,1

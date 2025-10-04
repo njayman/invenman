@@ -1,0 +1,19 @@
+<odoo>
+    <menuitem id="invenman.menu_root" name="Invenman" web_icon="invenman,static/description/icon.png" />
+    <menuitem id="invenman.menu_product_root" name="Products" sequence="6" parent="invenman.menu_root" action='invenman.product_action' />
+    <menuitem id="invenman.menu_product_category_root" name="Products Categories" sequence="7" parent="invenman.menu_root" action='invenman.product_category_action' />
+    <menuitem id="invenman.menu_customer_root" name="Customers" sequence="7" parent="invenman.menu_root" action='invenman.customer_action' />
+    <menuitem id="invenman.menu_supplier_root" name="Suppliers" sequence="7" parent="invenman.menu_root" action='invenman.supplier_action' />
+    <menuitem id="invenman.menu_product_lot_root" 
+              name="Product Lots" 
+              sequence="8" 
+              parent="invenman.menu_root" 
+              action="invenman.product_lot_action" />
+
+    <!-- Sales -->
+    <menuitem id="invenman.menu_sale_root" 
+              name="Sales" 
+              sequence="9" 
+              parent="invenman.menu_root" 
+              action="invenman.sale_action" />
+</odoo>

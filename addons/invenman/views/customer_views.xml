@@ -1,0 +1,22 @@
+<odoo>
+    <data>
+        <record id="invenman.customer_tree" model="ir.ui.view">
+            <field name="name">invenman.customer.tree</field>
+            <field name="model">invenman.customer</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="address"/>
+                    <field name="contact_no"/>
+                    <field name="nid"/>
+                </tree>
+            </field>
+        </record>
+        <record id="invenman.customer_action" model="ir.actions.act_window">
+            <field name="name">Customers</field>
+            <field name="res_model">invenman.customer</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+    </data>
+</odoo>
