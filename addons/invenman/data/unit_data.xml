@@ -1,0 +1,16 @@
+<odoo>
+    <data>
+        <record id="unit_piece" model="invenman.unit">
+            <field name="name">Piece</field>
+            <field name="symbol">pcs</field>
+        </record>
+        <record id="unit_kg" model="invenman.unit">
+            <field name="name">Kilogram</field>
+            <field name="symbol">kg</field>
+        </record>
+        <record id="unit_litre" model="invenman.unit">
+            <field name="name">Litre</field>
+            <field name="symbol">L</field>
+        </record>
+    </data>
+</odoo>

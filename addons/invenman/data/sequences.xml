@@ -1,0 +1,10 @@
+<odoo>
+    <data noupdate="1">
+        <record id="seq_product_ref" model="ir.sequence">
+            <field name="name">Product Reference</field>
+            <field name="code">invenman.product</field>
+            <field name="prefix">PROD</field>
+            <field name="padding">4</field>
+        </record> 
+    </data>
+</odoo>

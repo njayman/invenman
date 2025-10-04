@@ -1,6 +1,5 @@
 <odoo>
     <data>
-        <!-- Tree view -->
         <record id="invenman.sale_tree" model="ir.ui.view">
             <field name="name">invenman.sale.tree</field>
             <field name="model">invenman.sale</field>
@@ -10,46 +9,101 @@
                     <field name="customer_id"/>
                     <field name="sale_date"/>
                     <field name="total_amount"/>
+                    <field name="paid_amount" optional="show"/>
+                    <field name="due_amount" optional="show"/>
+                    <field name="payment_status" widget="badge"/>
                 </tree>
             </field>
         </record>
 
-        <!-- Form view -->
         <record id="invenman.sale_form" model="ir.ui.view">
             <field name="name">invenman.sale.form</field>
             <field name="model">invenman.sale</field>
             <field name="arch" type="xml">
                 <form string="Sale">
+                    <field name="show_due_only" invisible="1"/> 
+                    
                     <sheet>
-                        <group>
-                            <field name="name"/>
-                            <field name="customer_id"/>
-                            <field name="sale_date"/>
-                        </group>
-                        <notebook>
-                            <page string="Sale Lines">
-                                <field name="line_ids">
-                                    <tree editable="bottom">
-                                        <field name="lot_id" domain="[('available_quantity','>',0)]"/>
-                                        <field name="product_id" readonly="1"/>
-                                        <field name="supplier_id" readonly="1"/>
-                                        <field name="purchase_price" readonly="1"/>
-                                        <field name="quantity"/>
-                                        <field name="sale_price"/>
-                                        <field name="subtotal" readonly="1"/>
-                                    </tree>
-                                </field>
-                            </page>
-                        </notebook>
-                        <group>
-                            <field name="total_amount" readonly="1"/>
-                        </group>
-                    </sheet>
+                        <div class="o_form_sheet_main">
+                            
+                            <group>
+                                <group>
+                                    <field name="payment_status" widget="badge"/>
+                                    <field name="name" readonly="1"/>
+                                    <field name="customer_id" required="1"/>
+                                    <field name="sale_date"/>
+                                </group>
+                                <group string="Customer Preview">
+                                    
+                                    <div class="alert alert-danger" role="alert">
+                                        <field name="customer_total_due" readonly="1" string="Total Outstanding Balance" 
+                                               widget="monetary"/>
+                                    </div>
+                                    
+                                    <div class="d-flex justify-content-between align-items-center mb-2">
+                                        <h5 class="m-0">Recent Transactions</h5>
+                                        <field name="show_due_only" widget="boolean_toggle" string="Show Due Only"/>
+                                    </div>
+    
+                                    <field name="customer_recent_sales_ids" readonly="1" 
+                                           domain="['|', ('show_due_only', '=', False), ('due_amount', '>', 0)]" 
+                                           options="{'no_create': True, 'no_edit': True, 'no_open': False}">
+                                        <tree create="false" edit="false" delete="false">
+                                            <field name="name"/>
+                                            <field name="sale_date"/>
+                                            <field name="total_amount" optional="hidden"/>
+                                            <field name="due_amount" decoration-danger="due_amount &gt; 0" string="Due"/>
+                                        </tree>
+                                    </field>
+                                </group>
+                               
+                            </group>
+                            
+                            
+                            <notebook>
+                                <page string="Sale Lines">
+                                    <field name="line_ids">
+                                        <tree editable="bottom">
+                                            <field name="product_id"/>
+                                            <field name="lot_line_id" domain="[('product_id', '=', product_id), ('available_quantity','>',0)]"/>
+                                            <field name="supplier_id" readonly="1"/>
+                                            <field name="purchase_price" readonly="1"/>
+                                            <field name="quantity"/>
+                                            <field name="sale_price"/>
+                                            <field name="subtotal" readonly="1"/>
+                                        </tree>
+                                    </field>
+                                </page>
+                                
+                                <page string="Payments">
+                                    <field name="payment_ids">
+                                        <tree editable="bottom">
+                                            <field name="payment_date"/>
+                                            <field name="amount"/>
+                                        </tree>
+                                    </field>
+                                </page>
+                            </notebook>
+                            
+                            <group class="oe_subtotal_footer oe_right">
+                                <field name="total_amount" readonly="1"/>
+                                
+                                <field name="initial_paid_amount" 
+                                    invisible="[('id', '!=', False)]" 
+                                    placeholder="Enter initial amount paid."/> 
+
+                                <field name="paid_amount" readonly="1"
+                                    invisible="[('id', '=', False)]"/>
+
+                                <field name="due_amount" readonly="1" class="oe_subtotal_footer_separator"/>
+                            </group>
+                        </div>
+                        
+                        </sheet>
                 </form>
             </field>
         </record>
 
-        <!-- Action -->
         <record id="invenman.sale_action" model="ir.actions.act_window">
             <field name="name">Sales</field>
             <field name="type">ir.actions.act_window</field>

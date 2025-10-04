@@ -9,6 +9,14 @@ class Customer(models.Model):
     contact_no = fields.Char(string="Contact number")
     address = fields.Char(string="Address")
     nid = fields.Char(string="NID", required=True)
+    
+    # New computed field for total due amount
+    sale_ids = fields.One2many('invenman.sale', 'customer_id', string="Sales")
+    total_due_amount = fields.Float(
+        string="Total Due Amount", 
+        compute='_compute_total_due_amount', 
+        store=True,
+    )
 
     _sql_constraints = [('unique_customer_nid', 'unique(nid)', 'NID must be unique among customers.')]
 
@@ -22,3 +30,23 @@ class Customer(models.Model):
             
             if supplier:
                 raise ValidationError(f"NID {record.nid} already exists in Suppliers.")
+
+    @api.depends('sale_ids.due_amount')
+    def _compute_total_due_amount(self):
+        for customer in self:
+            customer.total_due_amount = sum(customer.sale_ids.mapped('due_amount'))
+
+    @api.model
+    def _name_search(self, name='', args=None, operator='ilike', limit=100, order=None, name_get_uid=None):
+        """Enables searching by Customer Name or Contact Number."""
+        args = args or []
+        if name:
+            domain = ['|', ('name', operator, name), ('contact_no', operator, name)]
+            return self._search(domain + args, limit=limit, order=order, access_rights_uid=name_get_uid)
+        
+        return super(Customer, self)._name_search(
+            name=name, 
+            operator=operator, 
+            limit=limit, 
+            order=order, 
+        )
